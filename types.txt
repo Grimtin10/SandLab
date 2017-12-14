@@ -3,8 +3,10 @@ stone-heavy
 water-liquid
 steam-gas
 lava-liquid
+fire-gas/plasma
 sand floats on stone
 sand sinks in water
 steam floats
 lava turns water to steam
 lava turns stone to lava
+fire turns water to steam
