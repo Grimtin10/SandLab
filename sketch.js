@@ -22,7 +22,7 @@ function setup() {
   frameRate(60);
   size = 10;
   type = 1;
-  chance = 0;
+  chance = 10;
   defaultDelay = 0;
   delay = defaultDelay;
   grid = create2DArray(floor(width/size),floor(height/size),0);
@@ -30,7 +30,7 @@ function setup() {
   for(var x=0;x<grid.length;x++){
     for(var y=0;y<grid[0].length;y++){
       if(random(0,1)*100<chance){
-        grid[x][y]=1;
+        grid[x][y]=7;
       }
     }
   }
@@ -66,6 +66,10 @@ function draw() {
         rect(x*size,y*size,size,size);
       }
       if(grid[x][y]==7){
+        fill(152,251,152);
+        rect(x*size,y*size,size,size);
+      }
+      if(grid[x][y]==8){
         fill(152,251,152);
         rect(x*size,y*size,size,size);
       }
@@ -309,7 +313,15 @@ function updateParticle(x,y){
   }
   if(grid[x][y]==7){
     var gone = false;
-    if(grid[x][y+1]==6){
+    var xPlus = x+1;
+    var xMinus = x-1;
+    if(xPlus>grid.length-1){
+      xPlus = grid.length-1;
+    }
+    if(xMinus<0){
+      xMinus=0;
+    }
+    if(grid[x][y+1]==6||grid[xPlus][y]==6||grid[xMinus][y]==6){
       grid[x][y]=6;
       gone = true;
     }
