@@ -1,0 +1,10 @@
+sand-medium
+stone-heavy
+water-liquid
+steam-gas
+lava-liquid
+sand floats on stone
+sand sinks in water
+steam floats
+lava turns water to steam
+lava turns stone to lava
