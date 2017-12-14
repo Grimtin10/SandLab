@@ -65,6 +65,10 @@ function draw() {
         fill(255+random(-20,20),127+random(-20,20),80+random(-20,20));
         rect(x*size,y*size,size,size);
       }
+      if(grid[x][y]==7){
+        fill(152,251,152);
+        rect(x*size,y*size,size,size);
+      }
     }
   }
 }
@@ -100,6 +104,8 @@ function update(){
     type=5;
   } else if(keyIsDown(54)||keyIsDown(102)){
     type=6;
+  } else if(keyIsDown(55)||keyIsDown(103)){
+    type=7;
   }
   for(var x=0;x<grid.length;x++){
     for(var y=0;y<grid[0].length;y++){
@@ -296,6 +302,35 @@ function updateParticle(x,y){
             grid[x][y]=0;
             gridTimes[x][y]=0;
             gridTimes[x-1][y]--;
+          }
+        }
+      }
+    }
+  }
+  if(grid[x][y]==7){
+    var gone = false;
+    if(grid[x][y+1]==6){
+      grid[x][y]=6;
+      gone = true;
+    }
+    if(grid[x][y-1]==0&&!gone){
+      if(grid[x][y-1]==0){
+        grid[x][y]=0;
+      }
+      grid[x][y-1]=7;
+    } else if(!gone){
+      if(random(0,1)<0.5){
+        if(x+1<grid.length){
+          if(grid[x+1][y]==0){
+            grid[x+1][y]=7;
+            grid[x][y]=0;
+          }
+        }
+      } else {
+        if(x-1>-1){
+          if(grid[x-1][y]==0){
+            grid[x-1][y]=7;
+            grid[x][y]=0;
           }
         }
       }
