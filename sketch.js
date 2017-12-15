@@ -332,8 +332,7 @@ function updateParticle(x,y){
       }
     }
   }
-  if(grid[x][y]==7){
-    var gone = false;
+  if(grid[x][y]==9){
     var xPlus = x+1;
     var xMinus = x-1;
     if(xPlus>grid.length-1){
@@ -342,27 +341,24 @@ function updateParticle(x,y){
     if(xMinus<0){
       xMinus=0;
     }
-    if(grid[x][y+1]==6||grid[xPlus][y]==6||grid[xMinus][y]==6){
-      grid[x][y]=6;
-      gone = true;
+    if(grid[x][y+1]!=8&&(grid[x][y+1]!=9){
+      grid[x][y+1]=0;
     }
-    if(grid[x][y-1]==0&&!gone){
-      if(grid[x][y-1]==0){
-        grid[x][y]=0;
-      }
-      grid[x][y-1]=7;
+    if(grid[x][y+1]!=8&&grid[x][y+1]!=9){
+      grid[x][y]=0;
+      grid[x][y+1]=9;
     } else if(!gone){
       if(random(0,1)<0.5){
         if(x+1<grid.length){
           if(grid[x+1][y]==0){
-            grid[x+1][y]=7;
+            grid[x+1][y]=9;
             grid[x][y]=0;
           }
         }
       } else {
         if(x-1>-1){
           if(grid[x-1][y]==0){
-            grid[x-1][y]=7;
+            grid[x-1][y]=9;
             grid[x][y]=0;
           }
         }
