@@ -22,7 +22,7 @@ function setup() {
   frameRate(60);
   size = 10;
   type = 1;
-  chance = 10;
+  chance = 0;
   defaultDelay = 0;
   delay = defaultDelay;
   grid = create2DArray(floor(width/size),floor(height/size),0);
