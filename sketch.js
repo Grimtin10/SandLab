@@ -5,6 +5,8 @@ var chance;
 var delay;
 var defaultDelay;
 var type;
+var defaultKeyDelay;
+var keyDelay;
 
 function create2DArray(cols,rows,def){
   arr = new Array(cols);
@@ -25,6 +27,8 @@ function setup() {
   chance = 0;
   defaultDelay = 0;
   delay = defaultDelay;
+  defaultKeyDelay = 3;
+  keyDelay = defaultKeyDelay;
   grid = create2DArray(floor(width/size),floor(height/size),0);
   gridTimes = create2DArray(grid.length,grid[0].length,0);
   for(var x=0;x<grid.length;x++){
@@ -70,11 +74,18 @@ function draw() {
         rect(x*size,y*size,size,size);
       }
       if(grid[x][y]==8){
-        fill(152,251,152);
+        fill(108,108,152);
+        rect(x*size,y*size,size,size);
+      }
+      if(grid[x][y]==9){
+        fill(124,252,0);
         rect(x*size,y*size,size,size);
       }
     }
   }
+  textSize(32);
+  fill(255);
+  text("Type: " + type, 5, height-40);
 }
 
 function update(){
@@ -94,6 +105,7 @@ function update(){
       delay--;
     }
   }
+  //Old code:
   if(keyIsDown(48)||keyIsDown(96)){
     type=0;
   } else if(keyIsDown(49)||keyIsDown(97)){
@@ -110,6 +122,15 @@ function update(){
     type=6;
   } else if(keyIsDown(55)||keyIsDown(103)){
     type=7;
+  }
+  if(keyIsDown(37)&&type>0&&keyDelay<=0){
+    type--;
+    keyDelay=defaultKeyDelay;
+  } else if(keyIsDown(39)&&keyDelay<=0){
+    type++;
+    keyDelay=defaultKeyDelay;
+  } else {
+    keyDelay--;
   }
   for(var x=0;x<grid.length;x++){
     for(var y=0;y<grid[0].length;y++){
