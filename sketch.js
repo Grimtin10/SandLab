@@ -64,11 +64,11 @@ function draw() {
         rect(x*size,y*size,size,size);
       } else if(grid[x][y]==5||grid[x][y]==6){
         var c = color(255+random(-20,20),127+random(-20,20),80+random(-20,20));
-        fill(c);
         if(grid[x][y]==6){
             fill(c,50);
             ellipse(x*size,y*size,size*(gridTimes[x][y]/2),size*(gridTimes[x][y]/2));
         }
+        fill(c);
         rect(x*size,y*size,size,size);
       } else if(grid[x][y]==7){
         fill(152,251,152);
