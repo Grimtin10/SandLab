@@ -66,10 +66,8 @@ function draw() {
         var c = color(255+random(-20,20),127+random(-20,20),80+random(-20,20));
         fill(c);
         if(grid[x][y]==6){
-           for(var i=0;i<floor(255/10);i++){
-            fill(c,gridTimes[x][y]);
-            ellipse(x*size,y*size,size*5,size*5);
-           }
+            fill(c,50);
+            ellipse(x*size,y*size,size*(gridTimes[x][y]/2),size*(gridTimes[x][y]/2));
         }
         rect(x*size,y*size,size,size);
       } else if(grid[x][y]==7){
