@@ -341,7 +341,7 @@ function updateParticle(x,y){
     if(xMinus<0){
       xMinus=0;
     }
-    if(grid[x][y+1]!=8&&(grid[x][y+1]!=9){
+    if(grid[x][y+1]!=8&&grid[x][y+1]!=9){
       grid[x][y+1]=0;
     }
     if(grid[x][y+1]!=8&&grid[x][y+1]!=9){
