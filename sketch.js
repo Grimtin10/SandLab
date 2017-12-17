@@ -98,7 +98,7 @@ function draw() {
 function getFPS(){
   var fr = (now-millis());
   now = millis();
-  return fr;
+  return abs(fr);
 }
 
 function update(){
