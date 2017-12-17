@@ -83,6 +83,10 @@ function draw() {
         fill(124,252,0);
         rect(x*size,y*size,size,size);
       }
+      if(grid[x][y]==10){
+        fill(139,69,19);
+        rect(x*size,y*size,size,size);
+      }
     }
   }
   textSize(32);
@@ -108,6 +112,8 @@ function update(){
         gridTimes[mX][mY] = 75;
       } else if(type==6){
         gridTimes[mX][mY] = 10;
+      } else if(type==10){
+        gridTimes[mX][mY] = 120;
       }
       grid[mX][mY] = type;
       console.log("Debug info: " + delay,round(map(mouseX,0,width,0,grid.length-1,true)),round(map(mouseY,0,height,0,grid[0].length-1,true)), grid[round(map(mouseX,0,width,0,grid.length,true))][round(map(mouseY,0,height,0,grid[0].length,true))]);
@@ -421,6 +427,39 @@ function updateParticle(x,y){
           }
         }
       }
+    }
+  }
+  if(grid[x][y]==10){
+    var xPlus = x+1;
+    var xMinus = x-1;
+    var gone = false;
+    var temp = gridTimes[x][y];
+    if(xPlus>grid.length-1){
+      xPlus = grid.length-1;
+    }
+    if(xMinus<0){
+      xMinus=0;
+    }
+    if(grid[xMinus][y]==6||grid[xPlus][y]==6||grid[x][y-1]==6||grid[x][y+1]==6){
+      if(grid[xPlus][y]==0||grid[xPlus][y]==6){
+        grid[xPlus][y]=6;
+      }
+      if(grid[xMinus][y]==0||grid[xMinus][y]==6){
+        grid[xMinus][y]=6;
+      }
+      if(grid[x][y-1]==0||grid[x][y-1]==6){
+        grid[x][y-1]=6;
+      }
+      if(grid[x][y+1]==0||grid[x][y+1]==6){
+        grid[x][y+1]=6;
+      }
+      gridTimes[x][y]=temp-1;
+    }
+    if(gridTimes[x][y]<=0){
+      gone=true;
+    }
+    if(gone){
+      grid[x][y]=0;
     }
   }
 }
