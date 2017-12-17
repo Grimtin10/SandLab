@@ -23,7 +23,7 @@ function create2DArray(cols,rows,def){
 function setup() {
   createCanvas(800,600);
   frameRate(60);
-  size = 10;
+  size = 5;
   type = 1;
   chance = 0;
   defaultDelay = 0;
