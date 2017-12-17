@@ -440,7 +440,7 @@ function updateParticle(x,y){
     if(xMinus<0){
       xMinus=0;
     }
-    if(grid[xMinus][y]==6||grid[xPlus][y]==6||grid[x][y-1]==6||grid[x][y+1]==6){
+    if(grid[xMinus][y]==6||grid[xPlus][y]==6||grid[x][y-1]==6||grid[x][y+1]==6||grid[xMinus][y-1]==6||grid[xPlus][y-1]==6||grid[xMinus][y+1]==6||grid[xPlus][y+1]==6){
       if(grid[xPlus][y]==0||grid[xPlus][y]==6){
         grid[xPlus][y]=6;
       }
