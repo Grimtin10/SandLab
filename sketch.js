@@ -86,6 +86,9 @@ function draw() {
   textSize(32);
   fill(255);
   text("Type: " + type, 5, height-40);
+  textSize(10);
+  fill(255);
+  text("FPS: " + frameRate, 5, 40);
 }
 
 function update(){
