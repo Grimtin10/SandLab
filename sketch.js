@@ -63,7 +63,14 @@ function draw() {
         fill(220,220,245);
         rect(x*size,y*size,size,size);
       } else if(grid[x][y]==5||grid[x][y]==6){
-        fill(255+random(-20,20),127+random(-20,20),80+random(-20,20));
+        var c = color(255+random(-20,20),127+random(-20,20),80+random(-20,20));
+        fill(c);
+        if(grid[x][y]==6){
+           for(var i=0;i<floor(255/10);i++){
+            fill(c,gridTimes[x][y]);
+            ellipse(x*size,y*size,size*5,size*5);
+           }
+        }
         rect(x*size,y*size,size,size);
       } else if(grid[x][y]==7){
         fill(152,251,152);
