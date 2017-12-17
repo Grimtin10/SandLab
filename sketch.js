@@ -7,6 +7,7 @@ var defaultDelay;
 var type;
 var defaultKeyDelay;
 var keyDelay;
+var now;
 
 function create2DArray(cols,rows,def){
   arr = new Array(cols);
@@ -31,6 +32,7 @@ function setup() {
   keyDelay = defaultKeyDelay;
   grid = create2DArray(floor(width/size),floor(height/size),0);
   gridTimes = create2DArray(grid.length,grid[0].length,0);
+  now = millis();
   for(var x=0;x<grid.length;x++){
     for(var y=0;y<grid[0].length;y++){
       if(random(0,1)*100<chance){
@@ -88,7 +90,13 @@ function draw() {
   text("Type: " + type, 5, height-40);
   textSize(10);
   fill(255);
-  text("FPS: " + frameRate, 5, 40);
+  text("FPS: " + getFPS(), 5, 40);
+}
+
+function getFPS(){
+  var fr = (millis()-now);
+  now = millis();
+  return fr;
 }
 
 function update(){
