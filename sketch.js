@@ -50,40 +50,31 @@ function draw() {
       if(grid[x][y]==0){
         fill(0);
         rect(x*size,y*size,size,size);
-      }
-      if(grid[x][y]==1){
+      } else if(grid[x][y]==1){
         fill(240,230,140);
         rect(x*size,y*size,size,size);
-      }
-      if(grid[x][y]==2){
+      } else if(grid[x][y]==2){
         fill(0,0,230);
         rect(x*size,y*size,size,size);
-      }
-      if(grid[x][y]==3){
+      } else if(grid[x][y]==3){
         fill(211);
         rect(x*size,y*size,size,size);
-      }
-      if(grid[x][y]==4){
+      } else if(grid[x][y]==4){
         fill(220,220,245);
         rect(x*size,y*size,size,size);
-      }
-      if(grid[x][y]==5||grid[x][y]==6){
+      } else if(grid[x][y]==5||grid[x][y]==6){
         fill(255+random(-20,20),127+random(-20,20),80+random(-20,20));
         rect(x*size,y*size,size,size);
-      }
-      if(grid[x][y]==7){
+      } else if(grid[x][y]==7){
         fill(152,251,152);
         rect(x*size,y*size,size,size);
-      }
-      if(grid[x][y]==8){
+      } else if(grid[x][y]==8){
         fill(108,108,152);
         rect(x*size,y*size,size,size);
-      }
-      if(grid[x][y]==9){
+      } else if(grid[x][y]==9){
         fill(124,252,0);
         rect(x*size,y*size,size,size);
-      }
-      if(grid[x][y]==10){
+      } else if(grid[x][y]==10){
         fill(139,69,19);
         rect(x*size,y*size,size,size);
       }
