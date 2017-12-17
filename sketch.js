@@ -361,6 +361,10 @@ function updateParticle(x,y){
       grid[x][y]=6;
       gone=true;
     }
+    if(grid[x][y-1]==6){
+      grid[x][y]=6;
+      gone=true;
+    }
     if(grid[x][y+1]==6){
       grid[x][y]=6;
       gone=true;
