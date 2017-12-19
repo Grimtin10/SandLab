@@ -8,6 +8,7 @@ var type;
 var defaultKeyDelay;
 var keyDelay;
 var now;
+var radius;
 
 function create2DArray(cols,rows,def){
   arr = new Array(cols);
@@ -33,6 +34,7 @@ function setup() {
   grid = create2DArray(floor(width/size),floor(height/size),0);
   gridTimes = create2DArray(grid.length,grid[0].length,0);
   now = millis();
+  radius = 0;
   for(var x=0;x<grid.length;x++){
     for(var y=0;y<grid[0].length;y++){
       if(random(0,1)*100<chance){
@@ -43,11 +45,20 @@ function setup() {
 }
 
 function draw() {
+  background(0);
   update();
   for(var x=0;x<grid.length;x++){
     for(var y=0;y<grid[0].length;y++){
       noStroke();
-      if(grid[x][y]==0){
+      var x1 = x+1;
+      var x2 = x-1;
+      if(x1>grid.length-1){
+        x1=grid.length-1;
+      }
+      if(x2<0){
+        x2=0;
+      }
+      if(grid[x][y]==0&&grid[x1][y]!=6&&grid[x2][y]!=6&&grid[x][y+1]!=6&&grid[x][y-1]!=6){
         fill(0);
         rect(x*size,y*size,size,size);
       } else if(grid[x][y]==1){
@@ -65,11 +76,12 @@ function draw() {
       } else if(grid[x][y]==5||grid[x][y]==6){
         var c = color(255+random(-20,20),127+random(-20,20),80+random(-20,20));
         if(grid[x][y]==6){
-            fill(c,50);
-            ellipse(x*size,y*size,size*(gridTimes[x][y]/2),size*(gridTimes[x][y]/2));
+          fill(c);
+          ellipse(x*size,y*size,size*(gridTimes[x][y]/2),size*(gridTimes[x][y]/2));
+        } else {
+          fill(c);
+          rect(x*size,y*size,size,size);
         }
-        fill(c);
-        rect(x*size,y*size,size,size);
       } else if(grid[x][y]==7){
         fill(152,251,152);
         rect(x*size,y*size,size,size);
@@ -88,13 +100,54 @@ function draw() {
   textSize(32);
   fill(255);
   text("Type: " + type, 5, height-40);
+  textSize(32);
+  fill(255);
+  text("Pen size: " + (radius+1), 5, height-80);
   textSize(10);
   fill(255);
   text("FPS: " + getFPS(), 5, 40);
 }
 
+function drawCircle(centerX,centerY,rad,type){
+  var d = 3-(2*rad);
+  var x=0;
+  var y = rad;
+  do{
+    centerXPlus = centerX+x;
+    centerXMinus = centerX-x;
+    centerYPlus = centerX+y;
+    centerYMinus = centerX-y;
+    if(centerXPlus>grid.length-1){
+      centerXPlus = grid.length-1;
+    }
+    if(centerXMinus<0){
+      centerXMinus = 0;
+    }
+    if(centerYPlus>grid.length-1){
+      centerYPlus = grid.length-1;
+    }
+    if(centerYMinus<0){
+      centerYMinus = 0;
+    }
+    grid[centerXPlus][centerY+y]=type;
+    grid[centerXPlus][centerY-y]=type;
+    grid[centerXMinus][centerY+y]=type;
+    grid[centerXMinus][centerY-y]=type;
+    grid[centerYPlus][centerY+x]=type;
+    grid[centerYPlus][centerY-x]=type;
+    grid[centerYMinus][centerY+x]=type;
+    grid[centerYMinus][centerY-x]=type;
+    if(d<0){
+      d=d+(4*x)+6;
+    } else {
+      d=d+4*(x-y)+10;
+    }
+    x++;
+  }while(x<=y);
+}
+
 function getFPS(){
-  var fr = (now-millis());
+  var fr = (millis()-now);
   now = millis();
   return abs(fr);
 }
@@ -103,6 +156,18 @@ function update(){
   if(mouseIsPressed){
     var mX = round(map(mouseX,0,width,0,grid.length,true));
     var mY = round(map(mouseY,0,height,0,grid[0].length,true));
+    if(mX>grid.length-1){
+      mX=grid.length-1;
+    }
+    if(mX<0){
+      mX=0;
+    }
+    if(mY<0){
+      mY=0;
+    }
+    if(mY>grid[0].length){
+      mY=grid[0].length;
+    }
     if(delay<=0){
       if(type==4){
         gridTimes[mX][mY] = 75;
@@ -111,8 +176,10 @@ function update(){
       } else if(type==10){
         gridTimes[mX][mY] = 120;
       }
-      grid[mX][mY] = type;
-      console.log("Debug info: " + delay,round(map(mouseX,0,width,0,grid.length-1,true)),round(map(mouseY,0,height,0,grid[0].length-1,true)), grid[round(map(mouseX,0,width,0,grid.length,true))][round(map(mouseY,0,height,0,grid[0].length,true))]);
+      for(var i=0;i<radius+1;i++){
+        drawCircle(mX,mY,i,type);
+      }
+      console.log("Debug info: " + delay,mX,mY,grid[mX][mY]);
       delay=defaultDelay;
     } else {
       delay--;
@@ -141,6 +208,12 @@ function update(){
     keyDelay=defaultKeyDelay;
   } else if(keyIsDown(39)&&keyDelay<=0){
     type++;
+    keyDelay=defaultKeyDelay;
+  } else if(keyIsDown(38)&&keyDelay<=0){
+    radius++;
+    keyDelay=defaultKeyDelay;
+  } else if(keyIsDown(40)&&radius>0&&keyDelay<=0){
+    radius--;
     keyDelay=defaultKeyDelay;
   } else {
     keyDelay--;
