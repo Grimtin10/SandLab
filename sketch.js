@@ -9,6 +9,7 @@ var defaultKeyDelay;
 var keyDelay;
 var now;
 var radius;
+var paused;
 
 function create2DArray(cols,rows,def){
   arr = new Array(cols);
@@ -35,6 +36,7 @@ function setup() {
   gridTimes = create2DArray(grid.length,grid[0].length,0);
   now = millis();
   radius = 0;
+  paused = false;
   for(var x=0;x<grid.length;x++){
     for(var y=0;y<grid[0].length;y++){
       if(random(0,1)*100<chance){
@@ -106,6 +108,17 @@ function draw() {
   textSize(10);
   fill(255);
   text("FPS: " + getFPS(), 5, 40);
+  drawPause(paused);
+}
+
+function drawPause(p){
+  if(p){
+    fill(255);
+    rect(40,width+40,20,5);
+    console.log("P");
+  } else {
+    //trinagle();
+  }
 }
 
 function drawCircle(centerX,centerY,rad,type){
@@ -215,12 +228,17 @@ function update(){
   } else if(keyIsDown(40)&&radius>0&&keyDelay<=0){
     radius--;
     keyDelay=defaultKeyDelay;
+  } else if(keyIsDown(32)&&keyDelay<=0){
+    paused=!paused;
+    keyDelay=defaultKeyDelay;
   } else {
     keyDelay--;
   }
-  for(var x=0;x<grid.length;x++){
-    for(var y=0;y<grid[0].length;y++){
-      updateParticle(x,y);
+  if(!paused){
+    for(var x=0;x<grid.length;x++){
+      for(var y=0;y<grid[0].length;y++){
+        updateParticle(x,y);
+      }
     }
   }
 }
