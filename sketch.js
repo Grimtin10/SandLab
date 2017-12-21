@@ -96,6 +96,9 @@ function draw() {
       } else if(grid[x][y]==10){
         fill(139,69,19);
         rect(x*size,y*size,size,size);
+      } else if(grid[x][y]==11){
+        fill(220,220,220);
+        rect(x*size,y*size,size,size);
       }
     }
   }
@@ -547,6 +550,34 @@ function updateParticle(x,y){
     }
     if(gone){
       grid[x][y]=0;
+    }
+  }
+  if(grid[x][y]==11){
+    if(grid[x][y+1]==0||grid[x][y+1]==6){
+      if(grid[x][y+1]==0){
+        grid[x][y]=0;
+      } else if(grid[x][y+1]==6){
+        grid[x][y]==6;
+      }
+      if(grid[x][y]!=6){
+        grid[x][y+1]=11;
+      }
+    } else {
+      if(random(0,1)<0.5){
+        if(x+1<grid.length){
+          if(grid[x+1][y]==0){
+            grid[x][y]=0;
+            grid[x+1][y]=11;
+          }
+        }
+      } else {
+        if(x-1>-1){
+          if(grid[x-1][y]==0){
+            grid[x][y]=0;
+            grid[x-1][y]=11;
+          }
+        }
+      }
     }
   }
 }
