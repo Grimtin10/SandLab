@@ -97,7 +97,7 @@ function draw() {
         fill(139,69,19);
         rect(x*size,y*size,size,size);
       } else if(grid[x][y]==11){
-        fill(220,220,220);
+        fill(235,235,235);
         rect(x*size,y*size,size,size);
       }
     }
@@ -206,7 +206,7 @@ function update(){
     type=0;
   } else if(keyIsDown(49)||keyIsDown(97)){
     type=1;
-  } else if(keyIsDown(50)||keyIsDown(98)){
+  } else if(keyIsDown(75)||keyIsDown(98)){
     type=2;
   } else if(keyIsDown(51)||keyIsDown(99)){
     type=3;
@@ -248,92 +248,98 @@ function update(){
 
 function updateParticle(x,y){
   if(grid[x][y]==1){
-    if(grid[x][y+1]==0||grid[x][y+1]==2||grid[x][y+1]==5){
-      if(grid[x][y+1]==0){
-        grid[x][y]=0;
-      } else if(grid[x][y+1]==2){
-        grid[x][y]=2;
-      } else if(grid[x][y+1]==5){
-        grid[x][y]=5;
-      }
-      grid[x][y+1]=1;
-    } else {
-      if(random(0,1)<0.5){
-        if(x+1<grid.length){
-          if(grid[x+1][y]==0){
-            grid[x][y]=0;
-            grid[x+1][y]=1;
-          }
+    if(random(0,1)*100<=50){
+      if(grid[x][y+1]==0||grid[x][y+1]==2||grid[x][y+1]==5){
+        if(grid[x][y+1]==0){
+          grid[x][y]=0;
+        } else if(grid[x][y+1]==2){
+          grid[x][y]=2;
+        } else if(grid[x][y+1]==5){
+          grid[x][y]=5;
         }
+        grid[x][y+1]=1;
       } else {
-        if(x-1>-1){
-          if(grid[x-1][y]==0){
-            grid[x][y]=0;
-            grid[x-1][y]=1;
+        if(random(0,1)<0.5){
+          if(x+1<grid.length){
+            if(grid[x+1][y]==0){
+              grid[x][y]=0;
+              grid[x+1][y]=1;
+            }
+          }
+        } else {
+          if(x-1>-1){
+            if(grid[x-1][y]==0){
+              grid[x][y]=0;
+              grid[x-1][y]=1;
+            }
           }
         }
       }
     }
   }
   if(grid[x][y]==2){
-    if(grid[x][y+1]==0||grid[x][y+1]==5){
-      if(grid[x][y+1]==0){
-        grid[x][y]=0;
-      } else if(grid[x][y+1]==5){
-        grid[x][y]=4;
-      }
-      if(grid[x][y]!=4){
-        grid[x][y+1]=2;
-      } else if(grid[x][y]==4){
-        grid[x][y+1]=1;
-      }
-    } else {
-      if(random(0,1)<0.5){
-        if(x+1<grid.length){
-          if(grid[x+1][y]==0){
-            grid[x][y]=0;
-            grid[x+1][y]=2;
-          }
+    if(random(0,1)*100<=75){
+      if(grid[x][y+1]==0||grid[x][y+1]==5){
+        if(grid[x][y+1]==0){
+          grid[x][y]=0;
+        } else if(grid[x][y+1]==5){
+          grid[x][y]=4;
+        }
+        if(grid[x][y]!=4){
+          grid[x][y+1]=2;
+        } else if(grid[x][y]==4){
+          grid[x][y+1]=1;
         }
       } else {
-        if(x-1>-1){
-          if(grid[x-1][y]==0){
-            grid[x][y]=0;
-            grid[x-1][y]=2;
+        if(random(0,1)<0.5){
+          if(x+1<grid.length){
+            if(grid[x+1][y]==0){
+              grid[x][y]=0;
+              grid[x+1][y]=2;
+            }
+          }
+        } else {
+          if(x-1>-1){
+            if(grid[x-1][y]==0){
+              grid[x][y]=0;
+              grid[x-1][y]=2;
+            }
           }
         }
       }
     }
   }
   if(grid[x][y]==3){
-    if(grid[x][y+1]==0||grid[x][y+1]==1||grid[x][y+1]==2||grid[x][y+1]==5){
-      if(grid[x][y+1]==0){
-        grid[x][y]=0;
-      } else if(grid[x][y+1]==2){
-        grid[x][y]=2;
-      } else if(grid[x][y+1]==1){
-        grid[x][y]=1;
-      } else if(grid[x][y+1]==5){
-        grid[x][y]=5;
-      }
-      if(grid[x][y]!=5){
-        grid[x][y+1]=3;
-      } else if(grid[x][y]==5){
-        grid[x][y+1]=5;
-      }
-    } else {
-      if(random(0,1)<0.5){
-        if(x+1<grid.length){
-          if(grid[x+1][y]==0){
-            grid[x][y]=0;
-            grid[x+1][y]=3;
-          }
+    if(random(0,1)*100<=80){
+      if(grid[x][y+1]==0||grid[x][y+1]==1||grid[x][y+1]==2||grid[x][y+1]==5){
+        if(grid[x][y+1]==0){
+          grid[x][y]=0;
+        } else if(grid[x][y+1]==2){
+          grid[x][y]=2;
+        } else if(grid[x][y+1]==1){
+          grid[x][y]=1;
+        } else if(grid[x][y+1]==5){
+          grid[x][y]=5;
+        }
+        if(grid[x][y]!=5){
+          grid[x][y+1]=3;
+        } else if(grid[x][y]==5){
+          grid[x][y+1]=5;
         }
       } else {
-        if(x-1>-1){
-          if(grid[x-1][y]==0){
-            grid[x][y]=0;
-            grid[x-1][y]=3;
+        if(random(0,1)<0.5){
+          if(x+1<grid.length){
+            if(grid[x+1][y]==0){
+              grid[x][y]=0;
+              grid[x+1][y]=3;
+            }
+          }
+        } else {
+          if(x-1>-1){
+            if(grid[x-1][y]==0){
+              grid[x][y]=0;
+              grid[x-1][y]=3;
+            }
           }
         }
       }
@@ -366,32 +372,34 @@ function updateParticle(x,y){
     }
   }
   if(grid[x][y]==5){
-    if(grid[x][y+1]==0||grid[x][y+1]==3||grid[x][y+1]==2){
-      if(grid[x][y+1]==0){
-        grid[x][y]=0;
-      } else if(grid[x][y+1]==3){
-        grid[x][y]==5;
-      } else if(grid[x][y+1]==2){
-        grid[x][y]==4;
-      }
-      if(grid[x][y]!=4){
-        grid[x][y+1]=5;
-      } else if(grid[x][y]==4){
-        grid[x][y+1]=1;
-      }
-    } else {
-      if(random(0,1)<0.5){
-        if(x+1<grid.length){
-          if(grid[x+1][y]==0){
-            grid[x][y]=0;
-            grid[x+1][y]=5;
-          }
+    if(random(0,1)*100<=75){
+      if(grid[x][y+1]==0||grid[x][y+1]==3||grid[x][y+1]==2){
+        if(grid[x][y+1]==0){
+          grid[x][y]=0;
+        } else if(grid[x][y+1]==3){
+          grid[x][y]==5;
+        } else if(grid[x][y+1]==2){
+          grid[x][y]==4;
+        }
+        if(grid[x][y]!=4){
+          grid[x][y+1]=5;
+        } else if(grid[x][y]==4){
+          grid[x][y+1]=1;
         }
       } else {
-        if(x-1>-1){
-          if(grid[x-1][y]==0){
-            grid[x][y]=0;
-            grid[x-1][y]=5;
+        if(random(0,1)<0.5){
+          if(x+1<grid.length){
+            if(grid[x+1][y]==0){
+              grid[x][y]=0;
+              grid[x+1][y]=5;
+            }
+          }
+        } else {
+          if(x-1>-1){
+            if(grid[x-1][y]==0){
+              grid[x][y]=0;
+              grid[x-1][y]=5;
+            }
           }
         }
       }
@@ -495,25 +503,24 @@ function updateParticle(x,y){
     if(xMinus<0){
       xMinus=0;
     }
-    if(grid[x][y+1]!=8&&grid[x][y+1]!=9){
-      grid[x][y+1]=0;
-    }
-    if(grid[x][y+1]!=8&&grid[x][y+1]!=9){
-      grid[x][y]=0;
-      grid[x][y+1]=9;
-    } else {
-      if(random(0,1)<0.5){
-        if(x+1<grid.length){
-          if(grid[x+1][y]==0){
-            grid[x+1][y]=9;
-            grid[x][y]=0;
-          }
-        }
+    if(random(0,1)*100<=75){
+      if(grid[x][y+1]!=8&&grid[x][y+1]!=9){
+        grid[x][y]=0;
+        grid[x][y+1]=9;
       } else {
-        if(x-1>-1){
-          if(grid[x-1][y]==0){
-            grid[x-1][y]=9;
-            grid[x][y]=0;
+        if(random(0,1)<0.5){
+          if(x+1<grid.length){
+            if(grid[x+1][y]==0){
+              grid[x+1][y]=9;
+              grid[x][y]=0;
+            }
+          }
+        } else {
+          if(x-1>-1){
+            if(grid[x-1][y]==0){
+              grid[x-1][y]=9;
+              grid[x][y]=0;
+            }
           }
         }
       }
@@ -553,28 +560,30 @@ function updateParticle(x,y){
     }
   }
   if(grid[x][y]==11){
-    if(grid[x][y+1]==0||grid[x][y+1]==6){
-      if(grid[x][y+1]==0){
-        grid[x][y]=0;
-      } else if(grid[x][y+1]==6){
-        grid[x][y]==6;
-      }
-      if(grid[x][y]!=6){
-        grid[x][y+1]=11;
-      }
-    } else {
-      if(random(0,1)<0.5){
-        if(x+1<grid.length){
-          if(grid[x+1][y]==0){
-            grid[x][y]=0;
-            grid[x+1][y]=11;
-          }
+    if(random(0,1)*100<=25){
+      if(grid[x][y+1]==0||grid[x][y+1]==6){
+        if(grid[x][y+1]==0){
+          grid[x][y]=0;
+        } else if(grid[x][y+1]==6){
+          grid[x][y]==6;
+        }
+        if(grid[x][y]!=6){
+          grid[x][y+1]=11;
         }
       } else {
-        if(x-1>-1){
-          if(grid[x-1][y]==0){
-            grid[x][y]=0;
-            grid[x-1][y]=11;
+        if(random(0,1)<0.5){
+          if(x+1<grid.length){
+            if(grid[x+1][y]==0){
+              grid[x][y]=0;
+              grid[x+1][y]=11;
+            }
+          }
+        } else {
+          if(x-1>-1){
+            if(grid[x-1][y]==0){
+              grid[x][y]=0;
+              grid[x-1][y]=11;
+            }
           }
         }
       }
